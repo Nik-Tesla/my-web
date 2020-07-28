@@ -19,7 +19,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-        {% for post in posts %}
+        {% for post in object_list %}
           <div class="post-preview">
             <a href="{% url 'home:post' post.slug %}">
               <h2 class="post-title">
@@ -41,15 +41,16 @@
           <hr>
         {% endfor %}
         <!-- Pager -->
-        <div class="clearfix pager-botton">
-          {% if posts.has_previous %}
-          <a class="btn btn-primary float-right ml-3" href="{% url 'home:home' posts.previous_page_number %}">پست های جدید &rarr;</a>
+        {% if is_paginated %}
+          <div class="clearfix pager-botton">
+          {% if page_obj.has_previous %}
+          <a class="btn btn-primary float-right ml-3" href="{% url 'home:home' page_obj.previous_page_number %}">پست های جدید &rarr;</a>
           {% endif %}
-          {% if posts.has_next %}
-          <a class="btn btn-primary float-right" href="{% url 'home:home' posts.next_page_number %}">پست های قدیمی &larr;</a>
+          {% if page_obj.has_next %}
+          <a class="btn btn-primary float-right" href="{% url 'home:home' page_obj.next_page_number %}">پست های قدیمی &larr;</a>
           {% endif %}
-
-        </div>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

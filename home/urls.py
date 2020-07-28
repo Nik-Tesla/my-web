@@ -3,10 +3,10 @@ from home import views
 
 app_name = 'home'
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('page/<int:page>', views.home, name='home'),
+    path('', views.postList.as_view(), name='home'),
+    path('page/<int:page>', views.postList.as_view(), name='home'),
     path('api/', views.api, name='api'),
-    path('article/<slug:slug>', views.post, name='post'),
-    path('category/<slug:slug>', views.category, name='category'),
-    path('category/<slug:slug>/page/<int:page>', views.category, name='category'),
+    path('article/<slug:slug>', views.postDetail.as_view(), name='post'),
+    path('category/<slug:slug>', views.categoryList.as_view(), name='category'),
+    path('category/<slug:slug>/page/<int:page>', views.categoryList.as_view(), name='category'),
 ]

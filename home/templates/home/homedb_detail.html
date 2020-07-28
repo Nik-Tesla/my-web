@@ -1,15 +1,15 @@
 {% extends 'home/base.html' %}
-{% block title %} | {{ post.tittle }}{% endblock%}
+{% block title %} | {{ object.tittle }}{% endblock%}
 {% block main %}
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{ post.photo.url }}')">
+  <header class="masthead" style="background-image: url('{{ object.photo.url }}')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading ">
             <h1>{{ post.tittle }}</h1>
-            <time style="color:#48c9b0">{{ post.jpublish }}</time>
+            <time style="color:#48c9b0">{{ object.jpublish }}</time>
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@
     <div class="container text-justify">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {{ post.document | linebreaks}}
+          {{ object.document | linebreaks}}
         </div>
       </div>
     </div>
