@@ -1,16 +1,58 @@
-{% extends 'home/list.html' %}
+{% extends 'home/base.html' %}
+{% load static %}
+{% block main %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('{% static 'home/img/home-bg.jpg'%}')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>HT Pink</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <img src="">
 
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <h3 class="alert alert-primary text-center ">{{category.tittle}}</h3>
+        {% for post in posts%}
+          <div class="post-preview">
+            <a href="{% url 'home:post' post.slug %}">
+              <h2 class="post-title">
+                {{ post.tittle }}
+              </h2>
+              <h3 class="post-subtitle text-justify">
+                {{ post.document | truncatewords:40 }}
+              </h3>
+            </a>
+            <p class="post-meta">نوشته شده توسط 
+              <a href="#">علی </a> در
+              {{ post.jpublish }}</p>
+              <div>
+                {% for cat in post.category_published.all %}
+                <a href="#">#{{cat.tittle}}</a>
+                {% endfor %}
+              </div>
+          </div>
+          <hr>
+        {% endfor %}
+        <!-- Pager -->
+        <div class="clearfix pager-botton">
+          {% if posts.has_previous %}
+             <a class="btn btn-primary float-right ml-3" href="{% url 'home:category' category.slug posts.previous_page_number %}">پست های جدید &rarr;</a>
+          {% endif %}
+          {% if posts.has_next %}
+             <a class="btn btn-primary float-right" href="{% url 'home:category' category.slug posts.next_page_number %}">پست های قدیمی &larr;</a>
+          {% endif %}
 
-{% block header %}
-<h3 class="alert alert-primary text-center ">{{category.tittle}}</h3>
-{% endblock %}
-
-
-{% block previous_page_url %}
-              {% url 'home:category' category.slug posts.previous_page_number %}
-{% endblock %}
-{% block next_page_url %}
-              {% url 'home:category' category.slug posts.next_page_number %}
-{% endblock %}
-
-
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

@@ -2,18 +2,26 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from .models import homedb, Category
+from django.views.generic.list import ListView
 # Create your views here.
 
 
-def home(request, page=1):
-    posts_list = homedb.objects.published()
-    paginator = Paginator(posts_list, 4)
-    posts = paginator.get_page(page)
-    context = {
-        "posts": posts,
+# def home(request, page=1):
+#     posts_list = homedb.objects.published()
+#     paginator = Paginator(posts_list, 4)
+#     posts = paginator.get_page(page)
+#     context = {
+#         "posts": posts,
 
-    }
-    return render(request, 'home/home.html', context)
+#     }
+#     return render(request, 'home/home.html', context)
+
+class postlist(ListView):
+    #model = homedb
+    #template_name = "home/home.html"
+    #context_object_name = "posts"
+    queryset = homedb.objects.published()
+    paginate_by = 4
 
 
 def post(request, slug):

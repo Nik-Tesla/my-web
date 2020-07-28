@@ -71,11 +71,15 @@ class homedb(models.Model):
         return jalali_converter(self.updated)
     jupdated.short_description = "بروزرسانی"
 
-    # def category_published(self):
-    #     return self.category.filter(status=True) #be jaye category_published as manager active dar line 14 estefade shod
+    def category_published(self):
+        return self.category.filter(status=True)
 
     def photo_tag(self):
         return format_html("<img height=70 width=110 style='border-radius: 5px;' src= '{}' >".format(self.photo.url))
     photo_tag.short_description = "تصویر مقاله "
+
+    objects = ArticleManager()
+
+    objects = ArticleManager()
 
     objects = ArticleManager()
