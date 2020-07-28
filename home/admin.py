@@ -31,11 +31,36 @@ def make_draft(modeladmin, request, queryset):
 make_draft.short_description = " پیش نویس کردن مقالات "
 
 
+def make_true(modeladmin, request, queryset):
+    updated = queryset.update(status=True)
+    modeladmin.message_user(request, ngettext(
+        'شما %d دسته بندی را قابل مشاهده کردید.',
+        'شما %d عدد از دسته بندی ها را قابل مشاهده کردید.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_true.short_description = " نمایش دادن "
+
+
+def make_false(modeladmin, request, queryset):
+    updated = queryset.update(status=False)
+    modeladmin.message_user(request, ngettext(
+        'شما %d دسته بندی را مخفی کردید.',
+        'شما %d عدد از دسته بندی ها را مخفی کردید.',
+        updated,
+    ) % updated, messages.SUCCESS)
+
+
+make_false.short_description = " مخفی کردن "
+
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("position", "tittle", "slug", "parent", "status")
     list_filter = ('status',)
     search_fields = ('tittle', 'slug')
     prepopulated_fields = {'slug': ('tittle',)}
+    actions = [make_false, make_true]
 
 
 admin.site.register(Category, CategoryAdmin)
@@ -50,7 +75,7 @@ class HomeAdmin(admin.ModelAdmin):
     actions = [make_published, make_draft]
 
     def category_to_str(self, obj):
-        return " , ".join([category.tittle for category in obj.category_published()])
+        return " , ".join([category.tittle for category in obj.category.active()])
     category_to_str.short_description = "دسته بندی"
 
 
