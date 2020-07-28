@@ -14,14 +14,16 @@
       </div>
     </div>
   </header>
-  <img src="">
+
 
   <!-- Main Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
-       {% block head %}{% endblock %}
-        {% for post in object_list%}
+       
+       {% block header %}{% endblock %}
+        
+        {% for post in object_list %}
           <div class="post-preview">
             <a href="{% url 'home:post' post.slug %}">
               <h2 class="post-title">
@@ -32,7 +34,7 @@
               </h3>
             </a>
             <p class="post-meta">نوشته شده توسط 
-              <a href="#">علی </a> در
+              <a href="{% url 'home:author' post.author %}">{{post.author.get_full_name}}</a> در
               {{ post.jpublish }}</p>
               <div>
                 {% for cat in post.category.active %}

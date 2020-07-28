@@ -1,12 +1,15 @@
 from django.urls import path, include
-from home import views
+from .views import *
 
 app_name = 'home'
 urlpatterns = [
-    path('', views.postList.as_view(), name='home'),
-    path('page/<int:page>', views.postList.as_view(), name='home'),
-    path('api/', views.api, name='api'),
-    path('article/<slug:slug>', views.postDetail.as_view(), name='post'),
-    path('category/<slug:slug>', views.categoryList.as_view(), name='category'),
-    path('category/<slug:slug>/page/<int:page>', views.categoryList.as_view(), name='category'),
+    path('', postList.as_view(), name='home'),
+    path('page/<int:page>', postList.as_view(), name='home'),
+    path('api/', api, name='api'),
+    path('article/<slug:slug>', postDetail.as_view(), name='post'),
+    path('category/<slug:slug>', categoryList.as_view(), name='category'),
+    path('category/<slug:slug>/page/<int:page>', categoryList.as_view(), name='category'),
+
+    path('author/<slug:username>', AuthorList.as_view(), name='author'),
+    path('author/<slug:username>/page/<int:page>', AuthorList.as_view(), name='author'),
 ]

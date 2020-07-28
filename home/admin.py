@@ -67,9 +67,9 @@ admin.site.register(Category, CategoryAdmin)
 
 
 class HomeAdmin(admin.ModelAdmin):
-    list_display = ("tittle", "photo_tag", "jcreated", "jupdated", "status", 'category_to_str')
+    list_display = ("tittle", "photo_tag", "author", "jcreated", "jupdated", "status", 'category_to_str')
     list_filter = ('publish', 'status')
-    search_fields = ('tittle', 'document')
+    search_fields = ('tittle', 'document', 'author')
     prepopulated_fields = {'slug': ('tittle',)}
     ordering = ['status', '-publish']
     actions = [make_published, make_draft]
