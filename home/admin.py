@@ -20,7 +20,7 @@ make_published.short_description = " منتشر کردن مقالات "
 
 
 def make_draft(modeladmin, request, queryset):
-    updated = queryset.update(status='D')
+    updated = queryset.update(status="D")
     modeladmin.message_user(request, ngettext(
         'شما %d مقاله را پیش نویس کردید.',
         'شما %d عدد از مقالات را پیش نویس کردید.',
