@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="site-heading ">
-            <h1>{{ post.tittle }}</h1>
+            <h1>{{ object.tittle }}</h1>
             <time style="color:#48c9b0">{{ object.jpublish }}</time>
           </div>
         </div>
@@ -20,7 +20,7 @@
     <div class="container text-justify">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-          {{ object.document | linebreaks}}
+          {{ object.document | safe}}
         </div>
       </div>
     </div>

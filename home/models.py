@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from extensions.utils import jalali_converter, persian_number_converter
@@ -73,11 +74,17 @@ class homedb(models.Model):
         return jalali_converter(self.updated)
     jupdated.short_description = "بروزرسانی"
 
+    def get_absolute_url(self):
+        return reverse("account:home")
     # def category_published(self):
     #     return self.category.filter(status=True)
 
     def photo_tag(self):
         return format_html("<img height=70 width=110 style='border-radius: 5px;' src= '{}' >".format(self.photo.url))
     photo_tag.short_description = "تصویر مقاله "
+
+    def category_to_str(self):
+        return " , ".join([category.tittle for category in self .category.active()])
+    category_to_str.short_description = "دسته بندی"
 
     objects = ArticleManager()

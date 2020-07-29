@@ -30,7 +30,7 @@
                 {{ post.tittle }}
               </h2>
               <h3 class="post-subtitle text-justify">
-                {{ post.document | truncatewords:40 }}
+                {{ post.document |striptags| truncatewords:40 }}
               </h3>
             </a>
             <p class="post-meta">نوشته شده توسط 
