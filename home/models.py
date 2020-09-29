@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.html import format_html
 from extensions.utils import jalali_converter, persian_number_converter
-from django.contrib.auth.models import User
-
+# from django.contrib.auth.models import User
+from account.models import User
 
 # My Manager
 class ArticleManager(models.Manager):
